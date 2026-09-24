@@ -1,0 +1,20 @@
+// Explicit buildscript + apply-plugin form. This is universally recognised
+// across Gradle/AGP versions and does not depend on pluginManagement resolution
+// in settings.gradle, which fails silently on some Studio distributions.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.5.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}

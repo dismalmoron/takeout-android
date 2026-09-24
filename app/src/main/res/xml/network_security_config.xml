@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Cleartext (HTTP) is required for the LAN case (http://192.168.x.x:5150) and is
+  blocked by default on Android 9+.
+
+  Android's network-security-config does NOT support CIDR ranges or wildcards in
+  <domain> elements - only literal hostnames/IPs. Enumerating every private IP is
+  impractical, so the policy is inverted: cleartext is permitted at the base
+  level (restoring pre-Android-9 behaviour for the LAN server), while the WebView
+  still enforces TLS for any https:// URL, and an untrusted certificate is
+  rejected in code (onReceivedSslError cancels the handler).
+
+  Net effect matching the requirement:
+    - http:// on the LAN  -> works (cleartext permitted)
+    - https:// remote     -> certificate validated; a self-signed cert is trusted
+                             only if the user installs it as a user CA (below)
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

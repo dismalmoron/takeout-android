@@ -1,0 +1,10 @@
+# COPY THIS FILE TO local.properties AND EDIT sdk.dir TO YOUR ANDROID SDK PATH.
+# Studio normally writes local.properties automatically, but some portable
+# distributions (e.g. Portapps) do not, and without it AGP silently fails to
+# apply, leaving 'app' as a plain module with no Android tasks.
+#
+# Typical locations:
+#   Portapps:  sdk.dir=D:\\portapps\\android-studio-portable\\data\\sdk
+#   Standard:  sdk.dir=C:\\Users\\<name>\\AppData\\Local\\Android\\Sdk
+# Backslashes MUST be doubled.
+sdk.dir=D:\\portapps\\android-studio-portable\\data\\sdk

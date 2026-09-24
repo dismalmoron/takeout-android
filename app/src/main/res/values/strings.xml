@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Takeout Index</string>
+    <string name="server_prompt">Enter your Takeout Index server address. It is saved, so you only enter it once.</string>
+    <string name="server_address_hint">Server address (e.g. 192.168.50.143:5150)</string>
+    <string name="server_label_hint">Name (optional, e.g. Home)</string>
+    <string name="connect">Connect</string>
+    <string name="saved_servers">Saved servers</string>
+</resources>
