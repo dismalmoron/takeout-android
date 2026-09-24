@@ -10,13 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
-      - run: gradle wrapper --gradle-version 8.9
-      - run: ./gradlew assembleRelease --stacktrace
+
+      # Ubuntu runners include the Android SDK at /usr/local/lib/android/sdk.
+      # Export it so Gradle finds it; skip the setup-android action which
+      # currently fails trying to install the deprecated 'tools' package.
+      - name: Configure Android SDK
+        run: |
+          echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
+
+      - name: Generate Gradle wrapper
+        run: gradle wrapper --gradle-version 8.9
+
+      - name: Build release APK
+        run: ./gradlew assembleRelease --stacktrace
+
       - uses: actions/upload-artifact@v4
         with:
           name: takeout-index-apk
